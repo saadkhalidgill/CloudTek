@@ -1,6 +1,6 @@
 export const environment = {
     production: true,
-    baseUrl: 'http://localhost:7070',
+    baseUrl: 'https://pure-basin-43301.herokuapp.com',
     signIn: '/signin',
     signUp: '/signup',
     signOut: '/signout',
