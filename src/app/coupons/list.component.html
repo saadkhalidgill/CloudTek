@@ -1,0 +1,30 @@
+﻿<h1>Manage Coupons</h1>
+<a routerLink="add" class="btn btn-sm btn-success mb-2">Add Coupon</a>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th style="width: 30%">Name</th>
+            <th style="width: 30%">Percent off</th>
+            <th style="width: 30%">Duration</th>
+            <th style="width: 10%"></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let coupon of coupons">
+            <td>{{coupon.name}}</td>
+            <td>{{coupon.percent_off}}</td>
+            <td>{{coupon.duration_in_months}}</td>
+            <td style="white-space: nowrap">
+                <button (click)="deleteCoupon(coupon.id)" class="btn btn-sm btn-danger btn-delete-coupon" [disabled]="coupon.isDeleting">
+                    <span *ngIf="coupon.isDeleting" class="spinner-border spinner-border-sm"></span>
+                    <span *ngIf="!coupon.isDeleting">Delete</span>
+                </button>
+            </td>
+        </tr>
+        <tr *ngIf="!coupons">
+            <td colspan="4" class="text-center">
+                <span class="spinner-border spinner-border-lg align-center"></span>
+            </td>
+        </tr>
+    </tbody>
+</table>
