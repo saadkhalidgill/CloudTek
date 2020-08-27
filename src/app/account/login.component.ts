@@ -22,7 +22,7 @@ export class LoginComponent implements OnInit {
 
     ngOnInit() {
         this.form = this.formBuilder.group({
-            username: ['', Validators.required],
+            username: ['', [Validators.required, Validators.email]],
             password: ['', Validators.required]
         });
 
@@ -35,14 +35,9 @@ export class LoginComponent implements OnInit {
 
     onSubmit() {
         this.submitted = true;
-
+        this.form.disable()
         // reset alerts on submit
         this.alertService.clear();
-
-        // stop here if form is invalid
-        if (this.form.invalid) {
-            return;
-        }
 
         this.loading = true;
         this.accountService.login(this.f.username.value, this.f.password.value)
@@ -52,6 +47,7 @@ export class LoginComponent implements OnInit {
                     this.router.navigate([this.returnUrl]);
                 },
                 error => {
+                    this.form.enable();
                     this.alertService.error(error);
                     this.loading = false;
                 });
